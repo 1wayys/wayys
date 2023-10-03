@@ -1,0 +1,261 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*pseudo-selector*/
+:root {
+  --text-color: white;
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-color-hover: rgba(255, 255, 255, 0.02);
+  --highlight-color: rgba(255, 255, 255, 0.2);
+
+  /*meu rsrsrs*/
+  --background-hover-wayys: rgba(255, 255, 255, 0.2);
+
+  --switch-bg-url: url(./assets/moon-stars.svg);
+}
+
+.light {
+  --text-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+
+  --background-hover-wayys: rgba(0, 0, 0, 0.1);
+
+  --switch-bg-url: url(./assets/sun.svg);
+}
+
+body {
+  /*
+  background-image: url(./assets/bg-mobile.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  */
+
+  /*background: color image repeat position/size */
+  background: var(--bg-url) no-repeat top center/cover;
+  height: 100vh;
+  /*VIEWPORT HEIGHT*/
+}
+
+#container {
+  width: 100%;
+  max-width: 588px;
+  margin: 56px auto 0px;
+  padding: 0 24px;
+
+  /* 56px = cima    auto = laterais    0px = em baixo*/
+}
+
+/*profile*/
+#profile {
+  text-align: center;
+  padding: 24px;
+}
+
+#profile img {
+  width: 112px;
+}
+
+/*ALINHAR ITENS BLOCK: MARGIN: AUTO 
+ALINHAR ITENS IN LINE: ALIGN ITEMS E JUSTIFY CONTENT*/
+
+#switch {
+  /*deixar o elemento dentro do limite da caixa apenas, ainda usando o absolute*/
+  position: relative;
+  /*colocar no mesmo tamanho do spam*/
+  width: 64px;
+  margin: 4px auto;
+}
+
+/*switch*/
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center;
+  /*50% fica redondo*/
+  border: 0;
+  border-radius: 50%;
+
+  /*!!!! ALINHAR E POSICIONAR NO CSS*/
+  /*PARA SOBREPOR ELEMENTOS EM LAYERS*/
+  position: absolute;
+  left: 0;
+
+  z-index: 1; /*PRIMEIRO ANDAR EIXO Z (PROFUNDIDADE, CAMADA)*/
+
+  transform: translateY(-50%); /*50% acima do eixo do span na camada abaixo*/
+  top: 50%; /*para voltar 50% e alinhar ao centro*/
+  animation: slide-back 0.2s forwards;
+}
+
+#switch button:hover {
+outline: 8px solid var(--highlight-color);
+}
+
+#switch span /*padrao display inline*/ {
+  display: block;
+  width: 64px;
+  height: 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+
+.light #switch button {
+/*animaçãooo*/
+animation: slide-in 0.4s forwards; /*MANTER NA MESMA PROPRIEDADE*/
+
+
+ /* 
+ right: 0;
+  left: initial; */ /*tem q colocar valor inicial*/
+}
+/* ELEMENTOS DISPLAY IN LINE NÃO SÃO ALINHADOS POR margin: auto;
+ELEMENTOS BLOCK PODEM.
+
+EX: IMG PODE SER ALINHADA POR text-align: center;
+
+HEIGHT NÃO É SEMPRE NECESSARIA POIS A ALTURA SE ADAPTA. O QUE É SEMPRE NECESSÁRIO É O WIDTH
+
+SITE TRICKS CSS: css tricks
+*/
+
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+}
+
+#profile p {
+  font-weight: 500;
+  line-height: 24px;
+  margin-top: 8px;
+}
+
+/* links*/
+
+ul {
+  /* TIRAR A ESTILIZAÇÃO, NO CASO OS PONTOS DA LISTA*/
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}
+
+ul li a {
+  border: 1px solid red;
+
+  display: flex;
+
+  /*alinhar o texto nos dois eixos*/
+  align-items: center;
+  justify-content: center;
+
+  /*16px = height /// 24px width*/
+  padding: 16px 24px;
+
+  background: var(--surface-color);
+  /*STROKE NA VARIAVEL*/
+  border: 1px solid var(--stroke-color);
+
+  /* ARRENDONDAR CANTOS */
+  border-radius: 8px;
+
+  backdrop-filter: blur(4px);
+
+  /* WEBKIT SERVE PARA ADAPTAR PARA OUTROS BROWSERS*/
+  -webkit-backdrop-filter: blur(4px);
+
+  /* TIRAR OS DETALHES, TIRAR O UNDERLINE QUE FICA EM BAIXO*/
+  text-decoration: none;
+  font-weight: 500;
+
+  transition: background 0.2s;
+}
+
+/* pseudo-selector */
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1.5px solid var(--text-color);
+}
+
+#social-links {
+  display: flex;
+  /*GAP = DAR ESPAÇO NOS ICONES*/
+  justify-content: center;
+
+  /*preenchimento da caixa ao redor*/
+  padding: 24px 0px;
+
+  font-size: 24px;
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+
+  transition: background 0.2s;
+  border-radius: 50%;
+}
+
+#social-links a:hover {
+  background: var(--highlight-color);
+}
+
+footer {
+  /*É NECESSÁRIO DAR O PADDING PRIMEIRO PARA ALINHAMENTO DAR CERTO OU DISPLAY FLEX*/
+
+  /*justify content só funciona com display*/
+
+  padding: 24px 0;
+  text-align: center;
+}
+
+footer a:hover {
+  background: var(--background-hover-wayys);
+  border-radius: 5%;
+}
+
+/* media queries // AT RULE */
+
+@media (min-width: 700px) {
+  :root {
+--bg-url: url(./assets/bg-desktop.jpg);
+  }
+
+  .light {
+    --bg-url: url(./assets/bg-desktop-light.jpg);
+  }
+}
+
+/*CRIAR ANIMAÇÕES*/
+
+@keyframes slide-in {
+from {
+  left:0;
+}
+to {
+  left:50%;
+}
+}
+
+@keyframes slide-back {
+from {
+  left:50%;
+}
+to {
+  left:0;
+}
+}
